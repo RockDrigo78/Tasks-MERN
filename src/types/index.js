@@ -1,1 +1,4 @@
 export const PROJECT_FORMULAR = "PROJECT_FORMULAR";
+export const FETCH_PROJECTS = "FETCH_PROJECTS";
+export const ADD_PROJECT = "ADD_PROJECT";
+export const VALIDATE_FORM = "VALIDATE_FORM";

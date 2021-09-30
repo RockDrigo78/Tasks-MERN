@@ -1,4 +1,5 @@
 import React from "react";
+// import projectContext from "../../context/projects/projectContext";
 
 const Project = ({ project }) => {
     return (

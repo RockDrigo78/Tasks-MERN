@@ -4,34 +4,42 @@ import projectContext from "../../context/projects/projectContext";
 const NewProject = () => {
     const projectsContext = useContext(projectContext);
 
-    const { formular } = projectsContext;
+    const { formular, showFormular, emptyForm, addProject, emptyFormError } =
+        projectsContext;
 
-    const [project, addProject] = useState({
+    const [project, newProjectName] = useState({
         name: "",
     });
 
-    const { name, id } = project;
+    const { name } = project;
 
     const onChange = (e) => {
-        addProject({
+        newProjectName({
             ...project,
             name: e.target.value,
         });
-        console.log(project.name);
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (name.length === 0) return;
 
-        console.log("name: ", name);
+        if (name === "") {
+            emptyFormError();
+            return;
+        }
 
-        addProject({ ...project, name: "" });
+        addProject(project);
+
+        newProjectName({ name: "" });
     };
 
     return (
         <Fragment>
-            <button type="button" className="btn btn-block btn-primario">
+            <button
+                type="button"
+                className="btn btn-block btn-primario"
+                onClick={() => showFormular()}
+            >
                 New Project
             </button>
 
@@ -51,6 +59,10 @@ const NewProject = () => {
                         value="Add Project"
                     />
                 </form>
+            ) : null}
+
+            {emptyForm ? (
+                <p className="mensaje error">Please enter a name</p>
             ) : null}
         </Fragment>
     );
